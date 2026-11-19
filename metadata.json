@@ -1,0 +1,6 @@
+{
+  "name": "MVCI Control",
+  "description": "Maa Vaishno Computer Institute Super Admin Control Center, ERP/LMS Ecosystem, and Universal Website Connector.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

@@ -1,0 +1,333 @@
+{
+  "entities": {
+    "WorkspaceConfig": {
+      "title": "WorkspaceConfig",
+      "description": "Root MVCI Super Admin workspace configuration and master settings.",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "instituteName": { "type": "string" },
+        "websiteUrl": { "type": "string" },
+        "directorName": { "type": "string" },
+        "mysqlHost": { "type": "string" },
+        "mysqlDbName": { "type": "string" },
+        "hostingProvider": { "type": "string" },
+        "languageCode": { "type": "string", "enum": ["en", "hi"] },
+        "darkTheme": { "type": "boolean" },
+        "maintenanceMode": { "type": "boolean" },
+        "autoBackupSchedule": { "type": "string" },
+        "otpRequired": { "type": "boolean" },
+        "adminUsername": { "type": "string" },
+        "adminPasswordSalt": { "type": "string" },
+        "adminPasswordHash": { "type": "string" },
+        "recoveryEmail": { "type": "string" },
+        "otpWebhookUrl": { "type": "string" },
+        "disabledModules": { "type": "array" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "instituteName", "websiteUrl", "directorName", "languageCode", "darkTheme", "maintenanceMode", "otpRequired", "createdAt", "updatedAt"]
+    },
+    "StudentRecord": {
+      "title": "StudentRecord",
+      "description": "Student admission, profile, batch, fee, and attendance record.",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "name": { "type": "string" },
+        "rollNo": { "type": "string" },
+        "email": { "type": "string" },
+        "phone": { "type": "string" },
+        "courseName": { "type": "string" },
+        "batchName": { "type": "string" },
+        "branchName": { "type": "string" },
+        "parentName": { "type": "string" },
+        "parentPhone": { "type": "string" },
+        "parentLinked": { "type": "boolean" },
+        "status": { "type": "string", "enum": ["ACTIVE", "INACTIVE", "PENDING", "TRANSFERRED", "PROMOTED"] },
+        "totalFee": { "type": "integer" },
+        "paidFee": { "type": "integer" },
+        "attendancePct": { "type": "integer" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "name", "rollNo", "courseName", "batchName", "branchName", "parentLinked", "status", "totalFee", "paidFee", "attendancePct", "createdAt", "updatedAt"]
+    },
+    "FranchiseRecord": {
+      "title": "FranchiseRecord",
+      "description": "MVCI franchise branch record with isolation, login provisioning, and revenue metrics.",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "code": { "type": "string" },
+        "name": { "type": "string" },
+        "city": { "type": "string" },
+        "ownerName": { "type": "string" },
+        "phone": { "type": "string" },
+        "email": { "type": "string" },
+        "status": { "type": "string", "enum": ["ACTIVE", "PENDING", "SUSPENDED"] },
+        "studentCount": { "type": "integer" },
+        "revenueTotal": { "type": "integer" },
+        "commissionPct": { "type": "integer" },
+        "loginProvisioned": { "type": "boolean" },
+        "brandingTitle": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "code", "name", "city", "ownerName", "status", "studentCount", "revenueTotal", "commissionPct", "loginProvisioned", "createdAt", "updatedAt"]
+    },
+    "StaffRecord": {
+      "title": "StaffRecord",
+      "description": "Admin, Franchise Admin, Faculty, and Parent user account record.",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "name": { "type": "string" },
+        "roleType": { "type": "string", "enum": ["SUPER_ADMIN", "ADMIN", "FRANCHISE_ADMIN", "FACULTY", "PARENT"] },
+        "customRoleName": { "type": "string" },
+        "branchName": { "type": "string" },
+        "email": { "type": "string" },
+        "phone": { "type": "string" },
+        "department": { "type": "string" },
+        "status": { "type": "string", "enum": ["ACTIVE", "PENDING", "SUSPENDED"] },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "name", "roleType", "branchName", "status", "createdAt", "updatedAt"]
+    },
+    "CourseRecord": {
+      "title": "CourseRecord",
+      "description": "Academic course, batch, timing, faculty allocation, and syllabus progress.",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "code": { "type": "string" },
+        "title": { "type": "string" },
+        "category": { "type": "string" },
+        "durationMonths": { "type": "integer" },
+        "feeAmount": { "type": "integer" },
+        "activeBatches": { "type": "integer" },
+        "syllabusProgressPct": { "type": "integer" },
+        "facultyName": { "type": "string" },
+        "batchTiming": { "type": "string" },
+        "status": { "type": "string", "enum": ["ACTIVE", "DRAFT", "ARCHIVED"] },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "code", "title", "category", "durationMonths", "feeAmount", "activeBatches", "syllabusProgressPct", "status", "createdAt", "updatedAt"]
+    },
+    "WebsiteConnector": {
+      "title": "WebsiteConnector",
+      "description": "Universal Website Connector configuration, health, and synchronization metadata.",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "name": { "type": "string" },
+        "url": { "type": "string" },
+        "siteType": { "type": "string" },
+        "description": { "type": "string" },
+        "integrationMethod": { "type": "string" },
+        "apiBaseUrl": { "type": "string" },
+        "maskedApiKey": { "type": "string" },
+        "authMethod": { "type": "string" },
+        "webhookUrl": { "type": "string" },
+        "syncDirection": { "type": "string", "enum": ["ONE_WAY", "TWO_WAY"] },
+        "syncFrequency": { "type": "string", "enum": ["MANUAL", "SCHEDULED", "AUTOMATIC"] },
+        "conflictPolicy": { "type": "string", "enum": ["SKIP_DUPLICATES", "MERGE_APPROVED", "SOURCE_WINS"] },
+        "status": { "type": "string", "enum": ["CONNECTED", "PAUSED", "ERROR", "PENDING", "DISCONNECTED"] },
+        "healthStatus": { "type": "string" },
+        "lastLatencyMs": { "type": "integer" },
+        "recordsImported": { "type": "integer" },
+        "recordsUpdated": { "type": "integer" },
+        "failedRecords": { "type": "integer" },
+        "fieldMappings": { "type": "string" },
+        "lastSyncNote": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "name", "url", "siteType", "integrationMethod", "authMethod", "syncDirection", "syncFrequency", "conflictPolicy", "status", "healthStatus", "lastLatencyMs", "recordsImported", "recordsUpdated", "failedRecords", "createdAt", "updatedAt"]
+    },
+    "RoleDefinition": {
+      "title": "RoleDefinition",
+      "description": "Custom role and permission matrix entry.",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "name": { "type": "string" },
+        "description": { "type": "string" },
+        "branchScope": { "type": "string" },
+        "permissionsMask": { "type": "string" },
+        "moduleScope": { "type": "string" },
+        "customRole": { "type": "boolean" },
+        "assignedCount": { "type": "integer" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "name", "branchScope", "permissionsMask", "moduleScope", "customRole", "assignedCount", "createdAt", "updatedAt"]
+    },
+    "WorkflowRule": {
+      "title": "WorkflowRule",
+      "description": "Automated event workflow rule with retry and duplicate prevention.",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "title": { "type": "string" },
+        "triggerEvent": { "type": "string" },
+        "actionSummary": { "type": "string" },
+        "enabled": { "type": "boolean" },
+        "retryLimit": { "type": "integer" },
+        "preventDuplicates": { "type": "boolean" },
+        "executionCount": { "type": "integer" },
+        "failureCount": { "type": "integer" },
+        "lastRunStatus": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "title", "triggerEvent", "actionSummary", "enabled", "retryLimit", "preventDuplicates", "executionCount", "failureCount", "lastRunStatus", "createdAt", "updatedAt"]
+    },
+    "PaymentRecord": {
+      "title": "PaymentRecord",
+      "description": "Fee collection, receipt, refund, and expense ledger item.",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "studentName": { "type": "string" },
+        "branchName": { "type": "string" },
+        "category": { "type": "string", "enum": ["ADMISSION", "COURSE_FEE", "EXAM_FEE", "FRANCHISE_FEE", "REFUND", "EXPENSE"] },
+        "amount": { "type": "integer" },
+        "paymentMode": { "type": "string" },
+        "receiptNo": { "type": "string" },
+        "status": { "type": "string", "enum": ["VERIFIED", "PENDING", "REFUNDED"] },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "studentName", "branchName", "category", "amount", "paymentMode", "receiptNo", "status", "createdAt", "updatedAt"]
+    },
+    "ExamRecord": {
+      "title": "ExamRecord",
+      "description": "Examination schedule, question count, published results, and certificates issued.",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "title": { "type": "string" },
+        "courseName": { "type": "string" },
+        "examType": { "type": "string", "enum": ["ONLINE", "INTERNAL", "FINAL", "PRACTICAL"] },
+        "scheduledDate": { "type": "string" },
+        "questionCount": { "type": "integer" },
+        "certificatesIssued": { "type": "integer" },
+        "status": { "type": "string", "enum": ["SCHEDULED", "LIVE", "PUBLISHED"] },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "title", "courseName", "examType", "scheduledDate", "questionCount", "certificatesIssued", "status", "createdAt", "updatedAt"]
+    },
+    "ContentItem": {
+      "title": "ContentItem",
+      "description": "LMS digital library, website builder pages/banners/notices, mobile app releases, and backups.",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "title": { "type": "string" },
+        "moduleCategory": { "type": "string", "enum": ["LMS_PDF", "LMS_VIDEO", "LMS_BOOK", "LMS_ASSIGNMENT", "WEB_PAGE", "WEB_BANNER", "WEB_NOTICE", "APP_VERSION", "BACKUP", "COMM_NOTICE"] },
+        "description": { "type": "string" },
+        "urlOrMeta": { "type": "string" },
+        "downloadable": { "type": "boolean" },
+        "status": { "type": "string", "enum": ["PUBLISHED", "DRAFT", "COMPLETED"] },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "title", "moduleCategory", "downloadable", "status", "createdAt", "updatedAt"]
+    },
+    "AuditLogEntry": {
+      "title": "AuditLogEntry",
+      "description": "Immutable centralized audit trail entry.",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "actorEmail": { "type": "string" },
+        "actorUsername": { "type": "string" },
+        "actorRole": { "type": "string", "enum": ["SUPER_ADMIN", "SYSTEM"] },
+        "action": { "type": "string" },
+        "moduleName": { "type": "string" },
+        "targetId": { "type": "string" },
+        "category": { "type": "string", "enum": ["SECURITY", "SETTINGS", "USERS", "FRANCHISE", "ACADEMIC", "FINANCE", "CONNECTOR", "SYSTEM"] },
+        "severity": { "type": "string", "enum": ["INFO", "WARNING", "CRITICAL"] },
+        "previousVal": { "type": "string" },
+        "newVal": { "type": "string" },
+        "deviceInfo": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "actorRole", "action", "moduleName", "targetId", "createdAt"]
+    },
+    "SystemNotification": {
+      "title": "SystemNotification",
+      "description": "System alert, parent alert, workflow notification, or integration error notice.",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "title": { "type": "string" },
+        "message": { "type": "string" },
+        "channel": { "type": "string", "enum": ["SYSTEM", "PARENT_ALERT", "WORKFLOW", "INTEGRATION"] },
+        "severity": { "type": "string", "enum": ["INFO", "WARNING", "CRITICAL"] },
+        "unread": { "type": "boolean" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "title", "message", "channel", "severity", "unread", "createdAt", "updatedAt"]
+    }
+  },
+  "firestore": {
+    "/workspaces/{userId}": {
+      "schema": { "$ref": "#/entities/WorkspaceConfig" },
+      "description": "Root MVCI Super Admin workspace configuration owned by authenticated user."
+    },
+    "/workspaces/{userId}/students/{studentId}": {
+      "schema": { "$ref": "#/entities/StudentRecord" },
+      "description": "Students and admissions managed in the workspace."
+    },
+    "/workspaces/{userId}/franchises/{franchiseId}": {
+      "schema": { "$ref": "#/entities/FranchiseRecord" },
+      "description": "Franchises and branches managed in the workspace."
+    },
+    "/workspaces/{userId}/staff/{staffId}": {
+      "schema": { "$ref": "#/entities/StaffRecord" },
+      "description": "Admin, franchise admin, faculty, and parent accounts."
+    },
+    "/workspaces/{userId}/courses/{courseId}": {
+      "schema": { "$ref": "#/entities/CourseRecord" },
+      "description": "Courses, batches, timings, and syllabus metadata."
+    },
+    "/workspaces/{userId}/connectors/{connectorId}": {
+      "schema": { "$ref": "#/entities/WebsiteConnector" },
+      "description": "Universal Website Connector configurations and sync statuses."
+    },
+    "/workspaces/{userId}/roles/{roleId}": {
+      "schema": { "$ref": "#/entities/RoleDefinition" },
+      "description": "Custom roles and permission matrices."
+    },
+    "/workspaces/{userId}/automations/{automationId}": {
+      "schema": { "$ref": "#/entities/WorkflowRule" },
+      "description": "Workflow automation rules."
+    },
+    "/workspaces/{userId}/payments/{paymentId}": {
+      "schema": { "$ref": "#/entities/PaymentRecord" },
+      "description": "Finance and accounting ledger records."
+    },
+    "/workspaces/{userId}/exams/{examId}": {
+      "schema": { "$ref": "#/entities/ExamRecord" },
+      "description": "Examination schedules, results, and certificates."
+    },
+    "/workspaces/{userId}/contents/{contentId}": {
+      "schema": { "$ref": "#/entities/ContentItem" },
+      "description": "LMS materials, website CMS items, mobile app releases, and backups."
+    },
+    "/workspaces/{userId}/audit_logs/{logId}": {
+      "schema": { "$ref": "#/entities/AuditLogEntry" },
+      "description": "Immutable centralized audit logs."
+    },
+    "/workspaces/{userId}/notifications/{notifId}": {
+      "schema": { "$ref": "#/entities/SystemNotification" },
+      "description": "System and workflow notifications."
+    }
+  }
+}
